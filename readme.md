@@ -68,7 +68,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `parque_atracciones`.`temporada`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`temporada` (
+CREATE TABLE IF NOT EXISTS `parque_atracciones`.`temporada` (
   `id_temporada` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(50) NOT NULL,
   `fecha_inicio` DATE NOT NULL,
@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `parque_atracciones`.`compra` (
   INDEX `id_cliente_idx` (`id_cliente` ASC) VISIBLE,
   CONSTRAINT `fk_compra_cliente`
     FOREIGN KEY (`id_cliente`)
-    REFERENCES `mydb`.`cliente` (`idcliente`)
+    REFERENCES `parque_atracciones`.`cliente` (`idcliente`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -126,12 +126,12 @@ CREATE TABLE IF NOT EXISTS `parque_atracciones`.`detalle_compra` (
   INDEX `id_tipo_pase_idx` (`id_tipo_pase` ASC) VISIBLE,
   CONSTRAINT `fk_detalle_compra_compra`
     FOREIGN KEY (`id_compra`)
-    REFERENCES `mydb`.`compra` (`id_compra`)
+    REFERENCES `parque_atracciones`.`compra` (`id_compra`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_detalle_compra_tipo_pase`
     FOREIGN KEY (`id_tipo_pase`)
-    REFERENCES `mydb`.`tipo_pase` (`id_tipo_pase`)
+    REFERENCES `parque_atracciones`.`tipo_pase` (`id_tipo_pase`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -151,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `parque_atracciones`.`pago` (
   UNIQUE INDEX `id_compra_UNIQUE` (`id_compra` ASC) VISIBLE,
   CONSTRAINT `fk_pago_compra`
     FOREIGN KEY (`id_compra`)
-    REFERENCES `mydb`.`compra` (`id_compra`)
+    REFERENCES `parque_atracciones`.`compra` (`id_compra`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -180,22 +180,22 @@ CREATE TABLE IF NOT EXISTS `parque_atracciones`.`pase` (
   INDEX `id_temporada_idx` (`id_temporada` ASC) VISIBLE,
   CONSTRAINT `fk_pase_cliente`
     FOREIGN KEY (`id_cliente`)
-    REFERENCES `mydb`.`cliente` (`idcliente`)
+    REFERENCES `parque_atracciones`.`cliente` (`idcliente`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_pase_detalle_compra`
     FOREIGN KEY (`id_detalle_compra`)
-    REFERENCES `mydb`.`detalle_compra` (`id_detalle`)
+    REFERENCES `parque_atracciones`.`detalle_compra` (`id_detalle`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_pase_tipo_pase`
     FOREIGN KEY (`id_tipo_pase`)
-    REFERENCES `mydb`.`tipo_pase` (`id_tipo_pase`)
+    REFERENCES `parque_atracciones`.`tipo_pase` (`id_tipo_pase`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_pase_temporada`
     FOREIGN KEY (`id_temporada`)
-    REFERENCES `mydb`.`temporada` (`id_temporada`)
+    REFERENCES `parque_atracciones`.`temporada` (`id_temporada`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -217,17 +217,17 @@ CREATE TABLE IF NOT EXISTS `parque_atracciones`.`historial_pase` (
   INDEX `id_compra_idx` (`id_compra` ASC) VISIBLE,
   CONSTRAINT `fk_historial_pase_pase`
     FOREIGN KEY (`id_pase`)
-    REFERENCES `mydb`.`pase` (`id_pase`)
+    REFERENCES `parque_atracciones`.`pase` (`id_pase`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_historial_pase_tipo_pase`
     FOREIGN KEY (`id_tipo_pase`)
-    REFERENCES `mydb`.`tipo_pase` (`id_tipo_pase`)
+    REFERENCES `parque_atracciones`.`tipo_pase` (`id_tipo_pase`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_historial_pase_compra`
     FOREIGN KEY (`id_compra`)
-    REFERENCES `mydb`.`compra` (`id_compra`)
+    REFERENCES `parque_atracciones`.`compra` (`id_compra`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
